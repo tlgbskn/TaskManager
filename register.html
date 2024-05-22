@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="form-container">
+        <form id="registerForm">
+            <h2>Kayıt Ol</h2>
+            <label for="registerName">Ad Soyad:</label>
+            <input type="text" id="registerName" name="registerName" required>
+
+            <label for="registerEmail">E-posta:</label>
+            <input type="email" id="registerEmail" name="registerEmail" required>
+
+            <label for="registerPassword">Şifre:</label>
+            <input type="password" id="registerPassword" name="registerPassword" required>
+
+            <label for="registerPhoto">Fotoğraf:</label>
+            <input type="file" id="registerPhoto" name="registerPhoto">
+
+            <label for="registerRole">Rol:</label>
+            <select id="registerRole" name="registerRole">
+                <option value="admin">Admin</option>
+                <option value="user">Kullanıcı</option>
+            </select>
+
+            <button type="submit">Kayıt Ol</button>
+        </form>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

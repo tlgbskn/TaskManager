@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performans Takibi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>İş Takip Uygulaması</h1>
+            <button onclick="location.href='dashboard.html'">Ana Ekran</button>
+            <button onclick="location.href='create-task.html'">Yeni İş Oluştur</button>
+            <button onclick="location.href='add-member.html'">Üye Ekle</button>
+            <button onclick="location.href='tasks.html'">İşleri Görüntüle</button>
+            <button onclick="location.href='workload.html'">İş Yükü</button>
+        </div>
+        <div class="content">
+            <h2>Performans Takibi</h2>
+            <table id="performanceTable">
+                <thead>
+                    <tr>
+                        <th>Tercüman</th>
+                        <th>İş Başlığı</th>
+                        <th>Tarih Aralığı</th>
+                        <th>Öncelik</th>
+                        <th>İşin Türü</th> <!-- Yeni sütun başlığı -->
+                        <th>Günlük İş Yükü (sayfa/gün)</th>
+                        <th>Yüzde İş Yükü (%)</th>
+                        <th>Toplam Efektif Çalışma Saati</th>
+                        <th>İş Yükü (Gün)</th>
+                        <th>Kişiye Düşen İş Günü/Toplam İş Günü</th>
+                    </tr>
+                </thead>
+                <tbody>
+            </table>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

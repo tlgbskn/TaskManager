@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üye Ekle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>İş Takip Uygulaması</h1>
+            <button onclick="location.href='dashboard.html'">Ana Ekran</button>
+            <button onclick="location.href='create-task.html'">Yeni İş Oluştur</button>
+            <button onclick="location.href='tasks.html'">İşleri Görüntüle</button>
+            <button onclick="location.href='performance.html'">Performans Takibi</button>
+        </div>
+        <div class="content">
+            <h2>Üye Ekle</h2>
+            <form id="addMemberForm" enctype="multipart/form-data">
+                <input type="text" id="memberName" placeholder="Üye Adı" required>
+                <input type="email" id="memberEmail" placeholder="Üye E-posta" required>
+                <label>Rol Seç:</label>
+                <select id="memberRole" required>
+                    <option value="Tercüman">Tercüman</option>
+                    <option value="Yönetici">Yönetici</option>
+                </select>
+                <label>Fotoğraf Yükle:</label>
+                <input type="file" id="memberPhoto">
+                <button type="submit">Kaydet</button>
+            </form>
+            
+            <h2>Üye Sil</h2>
+            <select id="deleteMemberSelect" required>
+                <!-- Üyeler dinamik olarak buraya eklenecek -->
+            </select>
+            <button id="deleteMemberButton">Sil</button>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>

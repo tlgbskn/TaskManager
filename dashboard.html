@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>İş Takip Uygulaması</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>İş Takip Uygulaması</h2>
+            <button id="openCreateTaskModal">Yeni İş Oluştur</button>
+            <button id="openAddMemberModal">Üye Ekle</button>
+            <button id="openDeleteMemberModal">Üye Sil</button>
+            <button id="openAddHolidayModal">Tatil Günü Ekle</button>
+            <button id="viewTasksButton">İşleri Görüntüle</button>
+            <button id="viewPerformanceButton">Performans Takibi</button>
+        </div>
+        <div class="content">
+            <div id="currentDate"></div>
+            <div id="userProfile">
+                <img id="userPhoto" src="placeholder.jpg" alt="User Photo">
+                <span id="userName">Kullanıcı Adı</span>
+            </div>
+            <div id="taskList"></div>
+            <div id="performanceTable">
+                <h2>Performans Takibi</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tercüman</th>
+                            <th>İş Başlığı</th>
+                            <th>Tarih Aralığı</th>
+                            <th>Öncelik</th>
+                            <th>İşin Türü</th> <!-- Yeni sütun başlığı -->
+                            <th>Günlük İş Yükü (sayfa/gün)</th>
+                            <th>Yüzde İş Yükü (%)</th>
+                            <th>Toplam Efektif Çalışma Saati</th>
+                            <th>İş Yükü (Gün)</th>
+                            <th>Kişiye Düşen İş Günü/Toplam İş Günü</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="workloadChartContainer">
+                <h2>Tercüman İş Yükü Grafiği</h2>
+                <canvas id="workloadChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="createTaskModal" class="modal">
+        <div class="modal-content">
+            <span id="closeCreateTaskModal" class="close">&times;</span>
+            <h2>Yeni İş Oluştur</h2>
+            <form id="createTaskForm">
+                <label for="taskTitle">İş Başlığı:</label>
+                <input type="text" id="taskTitle" name="taskTitle" required>
+                <label for="taskDescription">Açıklama:</label>
+                <textarea id="taskDescription" name="taskDescription" required></textarea>
+                <label for="taskStartDate">Başlama Tarihi:</label>
+                <input type="date" id="taskStartDate" name="taskStartDate" required>
+                <label for="taskEndDate">Bitiş Tarihi:</label>
+                <input type="date" id="taskEndDate" name="taskEndDate" required>
+                <label for="taskType">Doküman Türü:</label>
+                <select id="taskType" name="taskType" required>
+                    <option value="normal">Normal Metin</option>
+                    <option value="teknik">Teknik Metin</option>
+                    <option value="normal_kitap">Normal Kitap</option>
+                    <option value="teknik_kitap">Teknik Kitap</option>
+                </select>
+                <label for="taskPages">Sayfa Sayısı:</label>
+                <input type="number" id="taskPages" name="taskPages" required>
+                <label for="taskMembers">Tercümanlar:</label>
+                <select id="taskMembers" name="taskMembers" multiple required></select>
+                <label for="taskPriority">Öncelik:</label>
+                <select id="taskPriority" name="taskPriority" required>
+                    <option value="düşük">Düşük</option>
+                    <option value="orta">Orta</option>
+                    <option value="yüksek">Yüksek</option>
+                </select>
+                <button type="submit">Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="addMemberModal" class="modal">
+        <div class="modal-content">
+            <span id="closeAddMemberModal" class="close">&times;</span>
+            <h2>Üye Ekle</h2>
+            <form id="addMemberForm">
+                <label for="memberName">Üye Adı:</label>
+                <input type="text" id="memberName" name="memberName" required>
+                <label for="memberEmail">Üye E-posta:</label>
+                <input type="email" id="memberEmail" name="memberEmail" required>
+                <label for="memberRole">Rol Seç:</label>
+                <select id="memberRole" name="memberRole" required>
+                    <option value="Tercüman">Tercüman</option>
+                    <option value="Editör">Editör</option>
+                </select>
+                <label for="memberPhoto">Fotoğraf Yükle:</label>
+                <input type="file" id="memberPhoto" name="memberPhoto">
+                <button type="submit">Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteMemberModal" class="modal">
+        <div class="modal-content">
+            <span id="closeDeleteMemberModal" class="close">&times;</span>
+            <h2>Üye Sil</h2>
+            <form>
+                <label for="deleteMemberSelect">Üye Seç:</label>
+                <select id="deleteMemberSelect" name="deleteMemberSelect" required></select>
+                <button id="deleteMemberButton">Sil</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="addHolidayModal" class="modal">
+        <div class="modal-content">
+            <span id="closeAddHolidayModal" class="close">&times;</span>
+            <h2>Tatil Günü Ekle</h2>
+            <form id="addHolidayForm">
+                <label for="holidayMemberSelect">Üye Seç:</label>
+                <select id="holidayMemberSelect" name="holidayMemberSelect" required></select>
+                <label for="holidayStartDate">Tatil Başlangıç Tarihi:</label>
+                <input type="date" id="holidayStartDate" name="holidayStartDate" required>
+                <label for="holidayEndDate">Tatil Bitiş Tarihi:</label>
+                <input type="date" id="holidayEndDate" name="holidayEndDate" required>
+                <button type="submit">Kaydet</button>
+            </form>
+            <h3>Mevcut Tatiller</h3>
+            <table id="holidayList">
+                <thead>
+                    <tr>
+                        <th>Üye</th>
+                        <th>Tatil Başlangıç</th>
+                        <th>Tatil Bitiş</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
